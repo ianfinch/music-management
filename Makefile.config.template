@@ -1,0 +1,4 @@
+base := /opt/music
+master := $(base)/Master
+mp3s := $(base)/MP3s
+albumArtists := /tmp/album-artists.dat
