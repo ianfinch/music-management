@@ -6,8 +6,8 @@ include ./Makefile.config
 .PHONY: all
 all: mp3
 
-identifyAlbumArtists:
-	./scripts/identify-album-artists.sh '$(master)/CDs' '$(albumArtists)'
+albumArtistList:
+	./scripts/identify-album-artists.sh '$(master)/CDs' '$(master)/Metadata' '$(albumArtists)'
 
-mp3: identifyAlbumArtists
+mp3: albumArtistList
 	find '$(master)/CDs' -mindepth 2 -type d -exec ./scripts/process-master-album.sh {} '$(master)/CDs' '$(mp3s)' '$(albumArtists)' \;

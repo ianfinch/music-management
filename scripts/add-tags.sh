@@ -22,7 +22,7 @@ fi
 album="$( echo $src | /usr/bin/awk -F '/' '{print $(NF - 1)}' )"
 artist="$( echo $src | /usr/bin/awk -F '/' '{print $(NF - 2)}' | /usr/bin/sed 's/_/ /g' )"
 albumArtist="$( echo $dst | /usr/bin/awk -F '/' '{print $(NF - 2)}' | /usr/bin/sed 's/_/ /g' )"
-album="$( echo $album | /usr/bin/sed 's/_/ /g' )"
+album="$( echo $album | /usr/bin/sed -e 's/_/ /g' -e 's/=.*//' )"
 
 # Update the mp3 tags
 docker run -ti --rm -v"$dst":/home/appuser/audiofile guzo/audio-tools mid3v2 --delete-all audiofile
@@ -33,7 +33,7 @@ docker run -ti --rm -v"$dst":/home/appuser/audiofile guzo/audio-tools mid3v2 --T
                                                                         --TPE2 "$albumArtist" audiofile
 
 # If it's a compilation, add the marker for that
-if [[ "$albumArtist" == "Compilations" ]] ; then
+if [[ "$albumArtist" == "Various Artists" ]] ; then
 
     docker run -ti --rm -v"$dst":/home/appuser/audiofile guzo/audio-tools mid3v2 --TCMP 1 audiofile
 fi
