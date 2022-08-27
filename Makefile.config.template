@@ -1,4 +1,7 @@
 base := /opt/music
 master := $(base)/Master
+artwork := $(base)/Artwork
+fonts := $(base)/Fonts
+cache := $(base)/Cache
+albumArtists := $(cache)/album-artists.dat
 mp3s := $(base)/MP3s
-albumArtists := /tmp/album-artists.dat

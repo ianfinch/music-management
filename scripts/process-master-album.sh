@@ -5,6 +5,7 @@ album="$1"
 src="$2"
 target="$3"
 albumArtistData="$4"
+artwork="$5"
 
 # Somewhere to grab debug data
 debugData="INPUT PARAMETERS: album = $album, src = $src, target = $target, albumArtistData = $albumArtistData"

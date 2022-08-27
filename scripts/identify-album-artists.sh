@@ -12,8 +12,14 @@ datafile="$3"
 # Temporary directory to work in
 /bin/mkdir /tmp/$$
 
+# Make sure we have a directory for our datafile
+datadir=$( dirname "$datafile" )
+if [[ ! -e "$datadir" ]] ; then
+    mkdir "$datadir"
+fi
+
 # Only run this if we don't already have a data file
-if [[ -e $datafile ]] ; then
+if [[ -e "$datafile" ]] ; then
 
     exit
 fi
@@ -60,7 +66,7 @@ for album in $( find /tmp/$$/ -type d -execdir echo {} \; ) ; do
     artists=$( /bin/ls /tmp/$$/$album/* | /usr/bin/wc -l )
     (( artists = 0 + artists ))
     if [[ $artists == 1 ]] ; then
-        echo "$album/$( /bin/ls /tmp/$$/$album/ )" | sed -e 's|^\./||' >> $datafile
+        echo "$album/$( /bin/ls /tmp/$$/$album/ )" | sed -e 's|^\./||' >> "$datafile"
     fi
 done
 

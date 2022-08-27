@@ -10,4 +10,7 @@ albumArtistList:
 	./scripts/identify-album-artists.sh '$(master)/CDs' '$(master)/Metadata' '$(albumArtists)'
 
 mp3: albumArtistList
-	find '$(master)/CDs' -mindepth 2 -type d -exec ./scripts/process-master-album.sh {} '$(master)/CDs' '$(mp3s)' '$(albumArtists)' \;
+	find '$(master)/CDs' -mindepth 2 -type d -exec ./scripts/process-master-album.sh {} '$(master)/CDs' '$(mp3s)' '$(albumArtists)' '$(artwork)' \;
+
+checkAllCovers:
+	find '$(mp3s)' -mindepth 2 -type d -exec ./scripts/check-all-covers.sh {} '$(artwork)' '$(fonts)' '$(cache)' \;
